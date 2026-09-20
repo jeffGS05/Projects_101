@@ -65,5 +65,8 @@ jobs:
             -d etl_pipeline \
             -f sql/schema.sql
 
+      - name: Run ETL pipeline
+        run: ./scripts/run_pipeline.sh
+
       - name: Run tests
         run: pytest -v
