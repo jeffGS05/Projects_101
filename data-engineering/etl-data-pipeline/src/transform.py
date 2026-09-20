@@ -23,6 +23,25 @@ def transform_customers(records: list[dict]) -> list[dict]:
     return transformed
 
 
+
+def transform_order_items(records: list[dict]) -> list[dict]:
+    """Clean and convert extracted order item records."""
+
+    transformed = []
+
+    for record in records:
+        transformed.append(
+            {
+                "order_item_id": int(record["order_item_id"]),
+                "order_id": int(record["order_id"]),
+                "product_name": record["product_name"].strip(),
+                "quantity": int(record["quantity"]),
+                "unit_price": Decimal(record["unit_price"]),
+            }
+        )
+
+    return transformed
+
 def transform_orders(records: list[dict]) -> list[dict]:
     """Clean and convert extracted order records."""
 
