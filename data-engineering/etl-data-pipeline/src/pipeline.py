@@ -1,6 +1,7 @@
 from src.extract import extract_customers
 from src.load import load_customers
 from src.transform import transform_customers
+from src.validate import validate_customers
 
 
 INPUT_FILE = "data/raw/customers.csv"
@@ -14,6 +15,14 @@ def run_pipeline() -> None:
     print("Extracting customer data...")
     records = extract_customers(INPUT_FILE)
     print(f"Records extracted: {len(records)}")
+
+    print("Validating customer data...")
+    validate_customers(records)
+    print(f"Records validated: {len(records)}")
+
+    print("Validating customer data...")
+    validate_customers(records)
+    print(f"Records validated: {len(records)}")
 
     print("Transforming customer data...")
     records = transform_customers(records)
