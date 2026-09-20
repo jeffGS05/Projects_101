@@ -9,11 +9,11 @@ on:
     branches:
       - main
 
-jobs:
-  defaults:
-    run:
-      working-directory: data-engineering/etl-data-pipeline
+defaults:
+  run:
+    working-directory: data-engineering/etl-data-pipeline
 
+jobs:
   test:
     runs-on: ubuntu-latest
 
