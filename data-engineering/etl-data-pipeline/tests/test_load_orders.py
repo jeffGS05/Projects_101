@@ -18,3 +18,9 @@ def test_load_orders():
     loaded = load_orders(records)
 
     assert loaded == 1
+    cleanup_query = "DELETE FROM orders WHERE order_id = 9999"
+    from src.database import get_connection
+    with get_connection() as connection:
+        with connection.cursor() as cursor:
+            cursor.execute(cleanup_query)
+        connection.commit()
