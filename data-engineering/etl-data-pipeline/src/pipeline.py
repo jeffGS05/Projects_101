@@ -1,5 +1,5 @@
 from src.extract import extract_customers, extract_orders
-from src.load import load_customers
+from src.load import load_customers, load_orders
 from src.transform import transform_customers, transform_orders
 from src.validate import validate_customers, validate_orders
 
@@ -43,6 +43,10 @@ def run_pipeline() -> None:
     print("Transforming order data...")
     orders = transform_orders(orders)
     print(f"Orders transformed: {len(orders)}")
+
+    print("Loading order data...")
+    orders_loaded = load_orders(orders)
+    print(f"Orders loaded: {orders_loaded}")
 
     print("ETL pipeline completed successfully.")
 
