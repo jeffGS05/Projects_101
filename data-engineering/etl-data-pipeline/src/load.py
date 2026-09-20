@@ -39,3 +39,40 @@ def load_customers(records: list[dict]) -> int:
         connection.commit()
 
     return len(records)
+
+
+def load_orders(records: list[dict]) -> int:
+    """Load transformed order records into PostgreSQL."""
+
+    if not records:
+        return 0
+
+    query = """
+        INSERT INTO orders (
+            order_id,
+            customer_id,
+            order_date,
+            status,
+            total_amount
+        )
+        VALUES (
+            %(order_id)s,
+            %(customer_id)s,
+            %(order_date)s,
+            %(status)s,
+            %(total_amount)s
+        )
+        ON CONFLICT (order_id) DO UPDATE SET
+            customer_id = EXCLUDED.customer_id,
+            order_date = EXCLUDED.order_date,
+            status = EXCLUDED.status,
+            total_amount = EXCLUDED.total_amount
+    """
+
+    with get_connection() as connection:
+        with connection.cursor() as cursor:
+            cursor.executemany(query, records)
+
+        connection.commit()
+
+    return len(records)
