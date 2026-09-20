@@ -10,6 +10,10 @@ on:
       - main
 
 jobs:
+  defaults:
+    run:
+      working-directory: data-engineering/etl-data-pipeline
+
   test:
     runs-on: ubuntu-latest
 
